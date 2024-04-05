@@ -1,0 +1,31 @@
+@import '../../../ui/App.scss';
+
+.container-btn-fav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .btn-heart-fav{
+        background-color: black;
+        border: none;
+    }
+
+    .small {
+        width: 16px;
+        }
+    .medium {
+        width: 18px;
+        height: 16.5px;
+    }
+    .large {
+        width: 26px;
+        height: 25px;
+    }
+    
+    #counter{
+        color: $white-queen;
+        font-family: $Roboto;
+        font-size: 16px;
+    }
+
+}

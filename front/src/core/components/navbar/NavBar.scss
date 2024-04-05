@@ -1,0 +1,11 @@
+@import '../../../ui/App.scss';
+
+.nav-bar{
+    background-color: $black-panther;
+    padding: 16px 48px 16px 48px;
+    .nav-bar-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

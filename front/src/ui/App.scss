@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+// variables para fuentes
+$Roboto: "Roboto Condensed", sans-serif;
+$font-weight-bold: 700;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+
+// estilos del texto
+h1, h2, h3, h4, p {
+  font-family: $Roboto;
+  
+  // peso de cada fuente
+  & {
+    &:not(h3):not(p) {
+      font-weight: $font-weight-bold;
+    }
+
+    &:not(h1):not(h2):not(h4) {
+      font-weight: $font-weight-normal;
+    }
+
+    & h4 {
+      font-weight: $font-weight-medium;
+    }
+  }
+}
+
+//variables para colores
+
+$black-panther: #000000;
+$marvel-red: #EC1D24; 
+$white-queen: #FFF;
+
+
+
+

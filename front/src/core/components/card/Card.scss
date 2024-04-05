@@ -1,0 +1,31 @@
+@import '../../../ui/App.scss';
+
+
+.marvel-card {
+    width: 200px;
+    height: 190px;
+    .marvel-card-container{
+    
+        .marvel-card-container-img {
+            width: 100%;
+            margin-bottom: -4px;
+        }
+        .marvel-card-container-footer{
+            background-color: $black-panther;
+            border-top: solid 5.5px $marvel-red;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 90% 100%, 0 100%);
+            padding: 20px;
+            
+            .marvel-card-container-footer-info{
+                align-items: center;
+                display: flex;
+                justify-content: space-between;
+                text-transform: uppercase;
+                h3 {
+                    color: $white-queen;
+                    font-size: 14px;
+                }
+            }
+        }    
+    }
+}
