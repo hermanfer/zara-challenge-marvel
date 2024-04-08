@@ -1,8 +1,12 @@
 import React from 'react';
 import BtnFav from '../btn/BtnFav';
 import MarvelApi from '../../../adapters/api/MarvelApi';
+//import DemoImg from '../../../resources/img/example-char.png';
 
 import './Card.scss';
+
+
+
 
 const card = ({ name, imageUrl }) => {
   return (
@@ -13,7 +17,7 @@ const card = ({ name, imageUrl }) => {
             <footer className='marvel-card-container-footer'>
                 <div className="marvel-card-container-footer-info">
                     <h3>{name}</h3>
-                    <BtnFav size='small' hideCounter={true}  />
+                    <BtnFav size='small' hideCounter={true}/>
                 </div>
             </footer>
         </div>

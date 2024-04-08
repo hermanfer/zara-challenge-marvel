@@ -5,11 +5,16 @@
     width: 200px;
     height: 190px;
     .marvel-card-container{
+        overflow: hidden;
     
         .marvel-card-container-img {
             width: 100%;
             margin-bottom: -4px;
-        }
+            
+            transition: transform 0.3s ease;
+            }:hover{
+                transform: scale(1.1);
+            }
         .marvel-card-container-footer{
             background-color: $black-panther;
             border-top: solid 5.5px $marvel-red;

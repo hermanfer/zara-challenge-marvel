@@ -1,5 +1,12 @@
 @import '../../../ui/App.scss';
 
 .home-page{
-    padding: 50px;
+    
+    .home-page-container{
+        .home-page-container-cards{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+    }
 }

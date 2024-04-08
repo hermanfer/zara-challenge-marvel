@@ -1,0 +1,67 @@
+@import '../../../ui/App.scss';
+
+.container-card-detail{
+    .card-detail-header {
+        background-color: $black-panther;
+        width: 100%;
+        clip-path: polygon(0 0, 100% 0, 100% 92%, 98% 100%, 0 100%);
+        .card-detail-header__img-info{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            padding-left: 18%;
+            padding-right: 18%;
+            .card-detail-header__img-info-character-img{
+            width: 70%;
+            }
+            .card-detail-header__img-info-info-character{
+                
+                .card-detail-header__img-info-info-character-name-fav{
+                    display: flex;
+                    justify-content: space-between;
+                    color: $white-queen;
+                    font-size: 40px;    
+                    text-transform: uppercase;
+                    margin-bottom: -40px;
+                }
+            }
+            .card-detail-header__img-info-info-character-info{
+                font-size: 16px;
+                font-weight: $font-weight-normal;
+                color: $white-queen;
+            }
+
+        }
+    }
+    .container-comics{
+        padding-left: 18%;
+        padding-right: 18%;
+        margin-bottom: 100px;
+        h4{
+            font-size: 32px;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .card-detail-header {
+        clip-path: polygon(0 0, 100% 0, 100% 95%, 93% 100%, 0 100%) !important;
+        .card-detail-header__img-info{
+            flex-direction: column;
+            padding: 0 !important;
+            gap: 0 !important;
+            .card-detail-header__img-info-character-img{
+                width: 100% !important;
+            }
+            .card-detail-header__img-info-info-character{
+                padding: 5%;
+                .card-detail-header__img-info-info-character-name-fav{
+                    margin-bottom: -20px !important;
+                    margin-top: -25px;
+                    font-size: 32px !important;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,76 @@
+@import './../../../ui/App.scss';
+
+.carousel {
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    position: relative;
+    gap: 5px;
+
+    &::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #D9D9D9;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #FF0000;
+    }
+
+    &::-webkit-scrollbar-button {
+        display: none;
+    }
+}
+
+  
+  .carousel__item {
+    flex: 0 0 auto; 
+    width: 20%; /* Cambiado el ancho al 100% para que ocupe todo el contenedor */
+    transition: transform 0.5s ease-in-out;
+    display: flex; /* Hacer que el contenedor sea un flexbox */
+    flex-direction: column;
+  }
+  
+  .carousel__item--active {
+    z-index: 1;
+  }
+  
+  .carousel__item__image {
+    width: 179.2px; /* Tamaño de la imagen */
+    height: auto; /* Altura automática para mantener la proporción */
+    margin-right: 20px; /* Espacio entre la imagen y el contenido */
+  }
+  
+  .carousel__item__content {
+    flex: 1; /* El contenido ocupa todo el espacio disponible */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .carousel__item__content h3 {
+    margin-top: 10px; /* Eliminar el margen superior del título */
+    font-size: 16px; /* Tamaño del título */
+  }
+  
+  .carousel__item__content p {
+    margin-top: 2px; /* Espacio entre el título y el párrafo */
+    font-size: 12px;
+    color: $black-panther; /* Tamaño del párrafo */
+  }
+
+  @media screen and (max-width: 768px) {
+    .carousel{
+
+        .carousel__item{
+            width: 100%;
+        }   
+    }
+  }
+
+ 
+  
