@@ -10,7 +10,8 @@
     
         .marvel-card-container-img {
             width: 100%;
-            margin-bottom: -4px;
+            height: 187px;
+            display: block;
         }
 
         .marvel-card-container-footer {
@@ -30,6 +31,10 @@
                     color: $white-queen;
                     font-size: 14px;
                     background: transparent;
+                    max-width: 70%;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
                 }
             }
         }

@@ -1,42 +1,31 @@
-import React, { useState } from 'react';
-import './Home.scss';
-//import CardDetail from '../cardDetail/CardDetail';
-//import MarvelApi from '../../../adapters/api/MarvelApi';
+import React, { Suspense, useState, useEffect } from 'react';
 import Searcher from '../../../core/components/searcher/Searcher';
-import Card from '../../../core/components/card/Card'
+import { fetchData }  from '../../../adapters/api/fetchData';
+import Card from '../../../core/components/card/Card';
 
-//{characters.map(character => (
-  //<Card key={character.id} name={character.name} imageUrl={`${character.thumbnail.path}.${character.thumbnail.extension}`} />
-//))}
+//import CardDetail from '../cardDetail/CardDetail';
 
-//<MarvelApi setCharacters={setCharacters} />
+
+import './Home.scss';
+
 
 const Home = () => {
 
-  //const [characters, setCharacters] = useState([]);
-  // <CardDetail/> 
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
 
   return (
     <div className="home-page">
         <div className="home-page-container"> 
-        <Searcher/>
+        <Searcher onSearch={handleSearch}/>
         <div className="home-page-container-cards">
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
+        <Suspense fallback={<div>Loading...</div>}>
+            <CharacterList searchQuery={searchQuery} />
+          </Suspense>
         </div>
-
 
         </div>
 
@@ -44,5 +33,43 @@ const Home = () => {
     </div>
   )
 }
+
+const CharacterList = ({ searchQuery }) => {
+  const [resource, setResource] = useState(null);
+
+  useEffect(() => {
+    if (searchQuery === '') {
+      setResource(fetchData("https://gateway.marvel.com:443/v1/public/characters?ts=1&limit=50&apikey=12bcb82570057829e28513a85d0c78ce&hash=21c65676f13c349c8cbeea0605c3b4ee"));
+    } else {
+      const url = `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${encodeURIComponent(searchQuery)}&ts=1&limit=50&apikey=12bcb82570057829e28513a85d0c78ce&hash=21c65676f13c349c8cbeea0605c3b4ee`;
+      setResource(fetchData(url));
+    }
+  }, [searchQuery]);
+
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CharacterListContent resource={resource} />
+    </Suspense>
+  );
+};
+
+
+const CharacterListContent = ({ resource }) => {
+  const characters = resource ? resource.read() : [];
+
+  return (
+    <>
+      {characters.map(character => (
+        <Card
+          key={character.id}
+          name={character.name}
+          imageUrl={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+        />
+      ))}
+    </>
+  );
+};
+
+
 
 export default Home;
