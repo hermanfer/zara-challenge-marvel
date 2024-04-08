@@ -3,10 +3,28 @@
 .home-page{
     
     .home-page-container{
+        margin-right: 2%;
+        margin-left: 2%;
+        margin-bottom: 150px;
         .home-page-container-cards{
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
+            justify-content: space-around;
+            margin-top: 50px;
+            row-gap: 105px;
         }
     }
+}
+
+@media screen and (max-width: 768px) {
+.home-page{
+    .home-page-container{
+        margin: 0;
+        .home-page-container-cards{
+            justify-content: center;
+            gap: 10px;
+            row-gap: 35px;
+        }   
+    }
+} 
 }

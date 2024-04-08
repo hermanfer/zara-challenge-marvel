@@ -2,35 +2,52 @@
 
 
 .marvel-card {
-    width: 200px;
+    width: 188.57px;
     height: 190px;
-    .marvel-card-container{
+
+    .marvel-card-container {
         overflow: hidden;
     
         .marvel-card-container-img {
             width: 100%;
             margin-bottom: -4px;
-            
-            transition: transform 0.3s ease;
-            }:hover{
-                transform: scale(1.1);
-            }
-        .marvel-card-container-footer{
+        }
+
+        .marvel-card-container-footer {
             background-color: $black-panther;
             border-top: solid 5.5px $marvel-red;
             clip-path: polygon(0 0, 100% 0, 100% 85%, 90% 100%, 0 100%);
             padding: 20px;
-            
-            .marvel-card-container-footer-info{
+            transition: clip-path .3s, background-color .3s; /* Transición para clip-path y color de fondo */
+
+            .marvel-card-container-footer-info {
                 align-items: center;
                 display: flex;
                 justify-content: space-between;
                 text-transform: uppercase;
+
                 h3 {
                     color: $white-queen;
                     font-size: 14px;
+                    background: transparent;
                 }
             }
+        }
+
+        &:hover .marvel-card-container-footer {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 90% 100%, 0 100%);
+            background-color: $marvel-red;
         }    
     }
+}
+
+@media screen and (max-width: 768px){
+    .marvel-card {
+        width: 140px;
+    .marvel-card-container{
+        .marvel-card-container-footer{
+            padding: 12px;
+        }
+    }
+ }
 }

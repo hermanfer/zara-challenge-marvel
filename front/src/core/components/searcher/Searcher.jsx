@@ -7,9 +7,10 @@ const Searcher = () => {
   return (
     <div className="container-searcher">
         <label>
-        <img src={SearchIcon} alt="search-icon"/>
-        <input type="search" name="searcher" id="searcher" placeholder='Search a character...'/>
+            <input type="search" name="searcher" id="searcher" placeholder='Search a character...'/>
+            <img src={SearchIcon} alt="search-icon"/>
         </label>
+        <p>50 results</p>
     </div>
   );
 }

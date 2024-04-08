@@ -1,11 +1,12 @@
 @import '../../../ui/App.scss';
 
 .container-searcher {
-    margin: 20px 0 70px;
+    margin: 50px 11px 70px 11px;
     label {
         display: flex;
+        position: relative;
         input[type="search"] {
-            width: 100%;
+            width: 100%; /* El ancho del input menos el ancho del ícono */
             border: none;
             background-color: none;
             border-bottom: solid 2px $black-panther;
@@ -14,8 +15,22 @@
             text-transform: uppercase;
             font-size: 16px;
             padding: 10px;
-        }:focus {
-            outline: none;
+            padding-left: 30px; /* Espacio para el ícono */
+            &:focus {
+                outline: none; /* Elimina el borde inferior al hacer clic */
+            }
         }
+        img {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px; /* Tamaño del ícono */
+            height: 20px;
+            pointer-events: none;
+        }
+    }
+    p{
+        text-transform: uppercase;
     }
 }
