@@ -1,37 +1,45 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useFavorites } from '../../../adapters/state/FavoritesContext';
 import PropTypes from 'prop-types';
 import HeartEmpty from '../../../resources/img/heart-empty.svg';
 import Heart from '../../../resources/img/heart.svg';
 import './BtnFav.scss';
 
-const BtnFav = ({ size, hideCounter }) => {
-    const [isFavorited, setIsFavorited] = useState(false);
-    const [favoriteCount, setFavoriteCount] = useState(0);
+const BtnFav = ({ size, hideCounter, character, hasFavorites }) => {
+    const { toggleFavorite, favorites, favoriteCount } = useFavorites();
 
-    const toggleFavorite = () => {
-        setIsFavorited(!isFavorited);
-        setFavoriteCount(isFavorited ? favoriteCount - 1 : favoriteCount + 1);
+    const isFavorited = () => {
+        return character && favorites.some((fav) => fav.id === character.id);
     };
 
-  return (
+    const handleToggleFavorite = () => {
+        toggleFavorite(character);
+    };
 
-    <div className='container-btn-fav'>
-        <button className= 'btn-heart-fav' onClick={toggleFavorite}>
-            {isFavorited ? (
-                <img src={Heart} className={`heart-icon ${size}`} alt="heart-icon" />
-            ) : (
-                <img src={HeartEmpty} className={`heart-icon ${size}`} alt="heart-empty-icon" />
-            )}
-        </button>
-        {!hideCounter && <span id='counter'>{favoriteCount}</span>} 
-    </div>
-  );
-
+    return (
+        <div className='container-btn-fav'>
+            <button className='btn-heart-fav' onClick={handleToggleFavorite}>
+            {hasFavorites ? (
+                    <img src={favoriteCount > 0 ? Heart : HeartEmpty} className={`heart-icon ${size}`} alt="heart-icon" />
+                ) : (
+                    isFavorited() ? (
+                        <img src={Heart} className={`heart-icon ${size}`} alt="heart-icon" />
+                    ) : (
+                        <img src={HeartEmpty} className={`heart-icon ${size}`} alt="heart-empty-icon" />
+                    )
+                )}
+            </button>
+            {!hideCounter && <span id='counter'>{favoriteCount}</span>} 
+        </div>
+    );
 };
+
 
 BtnFav.propTypes = {
     size: PropTypes.oneOf(['small', 'medium', 'large']),
-    hideCounter: PropTypes.bool
+    hideCounter: PropTypes.bool,
+    character: PropTypes.object.isRequired,
+    hasFavorites: PropTypes.bool.isRequired
 };
 
 export default BtnFav;

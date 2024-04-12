@@ -1,75 +1,73 @@
-import React, { Suspense, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Searcher from '../../../core/components/searcher/Searcher';
-import { fetchData }  from '../../../adapters/api/fetchData';
 import Card from '../../../core/components/card/Card';
-
-//import CardDetail from '../cardDetail/CardDetail';
-
-
 import './Home.scss';
+import { useFetch } from '../../../adapters/api/useFetch'; 
+import { buildApiUrl } from '../../../adapters/api/buildApiUrl'; 
+import { Link } from 'react-router-dom';
 
-
-const Home = () => {
-
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const handleSearch = (query) => {
-    setSearchQuery(query);
-  };
-
-  return (
-    <div className="home-page">
-        <div className="home-page-container"> 
-        <Searcher onSearch={handleSearch}/>
-        <div className="home-page-container-cards">
-        <Suspense fallback={<div>Loading...</div>}>
-            <CharacterList searchQuery={searchQuery} />
-          </Suspense>
-        </div>
-
-        </div>
-
-        
-    </div>
-  )
-}
-
-const CharacterList = ({ searchQuery }) => {
-  const [resource, setResource] = useState(null);
-
-  useEffect(() => {
-    if (searchQuery === '') {
-      setResource(fetchData("https://gateway.marvel.com:443/v1/public/characters?ts=1&limit=50&apikey=12bcb82570057829e28513a85d0c78ce&hash=21c65676f13c349c8cbeea0605c3b4ee"));
-    } else {
-      const url = `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${encodeURIComponent(searchQuery)}&ts=1&limit=50&apikey=12bcb82570057829e28513a85d0c78ce&hash=21c65676f13c349c8cbeea0605c3b4ee`;
-      setResource(fetchData(url));
-    }
-  }, [searchQuery]);
-
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <CharacterListContent resource={resource} />
-    </Suspense>
-  );
-};
-
-
-const CharacterListContent = ({ resource }) => {
-  const characters = resource ? resource.read() : [];
+const CharacterList = ({ searchQuery, onCharacterClick }) => {
+  const apiUrl = buildApiUrl(searchQuery);
+  const { data: characters, isLoading, isPending } = useFetch(apiUrl);
 
   return (
     <>
-      {characters.map(character => (
-        <Card
-          key={character.id}
-          name={character.name}
-          imageUrl={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-        />
-      ))}
+      {isLoading || isPending ? ( 
+        <div>Loading...</div>
+      ) : (
+        <>
+          {characters.map(character => (
+            <Link to={`/character/${character.id}`} key={character.id} className="marvel-card-link">
+              <Card
+                key={character.id}
+                id={character.id}
+                name={character.name}
+                imageUrl={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+                onClick={() => onCharacterClick(character)}
+              />
+            </Link>
+          ))}
+        </>
+      )}
     </>
   );
 };
 
+const Home = (props) => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [totalResults, setTotalResults] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);  
 
+  useEffect(() => {
+    // Lógica para cargar los datos del personaje seleccionado
+    if (props.selectedCharacter) {
+      console.log('Selected character:', props.selectedCharacter);
+      props.fetchCharacterData(props.selectedCharacter.id);
+    }
+  }, [props.selectedCharacter, props.fetchCharacterData]);
+
+  const handleSearch = (query, total) => {
+    setSearchQuery(query);
+    setTotalResults(total);
+  };
+
+  const handleCharacterClick = async (character) => {
+    console.log('Clicked character:', character);
+    setIsLoading(true);
+    props.setSelectedCharacter(character);
+    setIsLoading(false);
+  };
+  
+  return (
+    <div className="home-page">
+      <div className='home-page-container'>
+        <Searcher onSearch={handleSearch} />
+        <div className="home-page-container-cards" style={{ justifyContent: searchQuery ? 'flex-start' : 'space-between' }}>
+          <CharacterList searchQuery={searchQuery} onCharacterClick={handleCharacterClick} />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Home;

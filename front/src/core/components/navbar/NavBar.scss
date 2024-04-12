@@ -1,14 +1,36 @@
 @import '../../../ui/App.scss';
 
-.nav-bar{
+// NavBar.scss
+.nav-bar {
     background-color: $black-panther;
     padding: 16px 48px 16px 48px;
-    .nav-bar-container{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    
+    .nav-bar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-}
+  }
+  
+  .loading-line {
+    position: relative;
+    width: 0; /* Inicialmente la línea de carga no tiene ancho */
+    height: 5px;
+    background-color: red; /* Color de la línea de carga */
+    animation: loadingAnimation 2s linear forwards; /* Animación de la línea de carga */
+  }
+  
+  @keyframes loadingAnimation {
+    from {
+      width: 0; /* La línea de carga comienza desde el lado izquierdo */
+    }
+    to {
+      width: 100%; /* La línea de carga llega al lado derecho */
+    }
+  }
+      
+  
+  
 
 @media screen and (max-width: 768px) {
     .nav-bar{

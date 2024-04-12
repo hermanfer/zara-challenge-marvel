@@ -1,7 +1,7 @@
 @import '../../../ui/App.scss';
 
 .container-searcher {
-    margin: 50px 11px 70px 11px;
+    margin: 50px 0 70px;
     label {
         display: flex;
         position: relative;
@@ -33,4 +33,11 @@
     p{
         text-transform: uppercase;
     }
+}
+
+@media screen and (max-width: 768px){
+    .container-searcher {
+        margin: 20px 7px 20px 7px;
+    }
+    
 }

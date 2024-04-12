@@ -1,10 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
+import { FavoritesProvider } from './adapters/state/FavoritesContext.jsx'; // Importa el contexto de favoritos
 import App from './ui/App.jsx';
 import './main.scss';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-    <App/>
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <FavoritesProvider>
+    <App />
+  </FavoritesProvider>
 );
-

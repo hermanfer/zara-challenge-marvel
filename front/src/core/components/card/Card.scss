@@ -1,50 +1,70 @@
 @import '../../../ui/App.scss';
 
 
+
+.marvel-card-link{
+  text-decoration: none;
+
 .marvel-card {
     width: 188.57px;
     height: 190px;
-
-    .marvel-card-container {
-        overflow: hidden;
     
-        .marvel-card-container-img {
-            width: 100%;
-            height: 187px;
-            display: block;
+  
+    .marvel-card-container {
+      overflow: hidden;
+      position: relative; /* Para posicionar correctamente el pseudo-elemento */
+  
+      .marvel-card-container-img {
+        width: 100%;
+        height: 187px;
+        display: block;
+      }
+  
+      .marvel-card-container-footer {
+        background-color: $black-panther;
+        border-top: solid 5.5px $marvel-red;
+        padding: 20px;
+        position: relative; /* Asegurar que el z-index funcione correctamente */
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 90% 100%, 0 100%); /* Mantener el clip-path */
+        
+        .marvel-card-container-footer-info {
+          align-items: center;
+          display: flex;
+          justify-content: space-between;
+          text-transform: uppercase;
+  
+          h3 {
+            color: $white-queen;
+            font-size: 14px;
+            background: transparent;
+            max-width: 70%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
         }
-
-        .marvel-card-container-footer {
-            background-color: $black-panther;
-            border-top: solid 5.5px $marvel-red;
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 90% 100%, 0 100%);
-            padding: 20px;
-            transition: clip-path .3s, background-color .3s; /* Transición para clip-path y color de fondo */
-
-            .marvel-card-container-footer-info {
-                align-items: center;
-                display: flex;
-                justify-content: space-between;
-                text-transform: uppercase;
-
-                h3 {
-                    color: $white-queen;
-                    font-size: 14px;
-                    background: transparent;
-                    max-width: 70%;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                }
-            }
+  
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 0;
+          background-color: $marvel-red; /* Color de la parte superior */
+          z-index: -1; /* Asegurar que esté detrás del contenido */
+          clip-path: polygon(0 0, 100% 0, 100% 85%, 90% 100%, 0 100%); 
+          transition: height 0.3s;
         }
-
-        &:hover .marvel-card-container-footer {
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 90% 100%, 0 100%);
-            background-color: $marvel-red;
-        }    
+      }
+  
+      &:hover .marvel-card-container-footer::before {
+        height: 100%;
+      }
     }
-}
+  }
+} 
+  
 
 @media screen and (max-width: 768px){
     .marvel-card {
