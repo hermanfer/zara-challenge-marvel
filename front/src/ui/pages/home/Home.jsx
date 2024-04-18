@@ -36,18 +36,18 @@ const CharacterList = ({ searchQuery, onCharacterClick }) => {
   );
 };
 
-const Home = (props) => {
+const Home = ({ selectedCharacter, fetchCharacterData, setSelectedCharacter }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [totalResults, setTotalResults] = useState(0);
   const [isLoading, setIsLoading] = useState(false);  
 
   useEffect(() => {
     // Lógica para cargar los datos del personaje seleccionado
-    if (props.selectedCharacter) {
-      console.log('Selected character:', props.selectedCharacter);
-      props.fetchCharacterData(props.selectedCharacter.id);
+    if (selectedCharacter) {
+      console.log('Selected character:', selectedCharacter);
+      fetchCharacterData(selectedCharacter.id);
     }
-  }, [props.selectedCharacter, props.fetchCharacterData]);
+  }, [selectedCharacter, fetchCharacterData]);
 
   const handleSearch = (query, total) => {
     setSearchQuery(query);
@@ -57,7 +57,7 @@ const Home = (props) => {
   const handleCharacterClick = async (character) => {
     console.log('Clicked character:', character);
     setIsLoading(true);
-    props.setSelectedCharacter(character);
+    setSelectedCharacter(character);
     setIsLoading(false);
   };
   

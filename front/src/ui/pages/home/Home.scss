@@ -19,13 +19,12 @@
 @media screen and (max-width: 768px) {
     .home-page{
         .home-page-container{
-            margin-right: 2%;
-            margin-left: 2%;
+            margin-right: 5%;
+            margin-left: 5%;
         
             .home-page-container-cards {
-                justify-content: space-around;
                 column-gap: 0;
-                row-gap: 90px;
+                row-gap: 110px;
             }
         }
     }
