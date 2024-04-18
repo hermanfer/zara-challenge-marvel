@@ -1,8 +1,8 @@
-import React, { Suspense } from 'react';
-import BtnFav from '../../../core/components/btn/BtnFav';
-import { useFavorites } from '../../../adapters/state/FavoritesContext';
-import Carousel from '../../../core/components/carousel/Carousel'
-import './CardDetail.scss';
+import React, { Suspense } from "react";
+import BtnFav from "../../../core/components/btn/BtnFav";
+import { useFavorites } from "../../../adapters/state/FavoritesContext";
+import Carousel from "../../../core/components/carousel/Carousel";
+import "./CardDetail.scss";
 
 const CardDetail = ({ selectedCharacter }) => {
   const { toggleFavorite } = useFavorites();
@@ -24,20 +24,33 @@ const CardDetail = ({ selectedCharacter }) => {
       <div className="container-card-detail">
         <header className="card-detail-header">
           <div className="card-detail-header__img-info">
-            <img className="card-detail-header__img-info-character-img" src={imageUrl} alt={name} />
+            <img
+              className="card-detail-header__img-info-character-img"
+              src={imageUrl}
+              alt={name}
+            />
             <div className="card-detail-header__img-info-info-character">
               <div className="card-detail-header__img-info-info-character-name-fav">
-                <h4 className="card-detail-header__img-info-info-character-name">{name}</h4>
-                <BtnFav hideCounter={true} character={{ id, name, imageUrl }} onClick={handleToggleFavorite} />
+                <h4 className="card-detail-header__img-info-info-character-name">
+                  {name}
+                </h4>
+                <BtnFav
+                  hideCounter={true}
+                  character={{ id, name, imageUrl }}
+                  onClick={handleToggleFavorite}
+                />
               </div>
-              <p className="card-detail-header__img-info-info-character-info"> {description ? description : "Description not available"}</p>
+              <p className="card-detail-header__img-info-info-character-info">
+                {" "}
+                {description ? description : "Description not available"}
+              </p>
             </div>
           </div>
         </header>
 
         <div className="container-comics">
           <h4>COMICS</h4>
-          <Carousel characterId={id}  />
+          <Carousel characterId={id} />
         </div>
       </div>
     </Suspense>

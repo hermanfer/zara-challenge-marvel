@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 const useFetchDataComicId = (url) => {
   const [comics, setComics] = useState([]);
@@ -13,7 +13,7 @@ const useFetchDataComicId = (url) => {
       try {
         const response = await fetch(url);
         if (!response.ok) {
-          throw new Error('Failed to fetch data');
+          throw new Error("Failed to fetch data");
         }
         const responseData = await response.json();
         const comicsData = responseData.data.results; // Aquí ajusta la ruta para los cómics en la respuesta

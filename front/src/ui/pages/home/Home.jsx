@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import Searcher from '../../../core/components/searcher/Searcher';
-import Card from '../../../core/components/card/Card';
-import './Home.scss';
-import { useFetch } from '../../../adapters/api/useFetch'; 
-import { buildApiUrl } from '../../../adapters/api/buildApiUrl'; 
-import { Link } from 'react-router-dom';
-import Loader from '../../../core/components/loader/Loader';
+import React, { useState, useEffect } from "react";
+import Searcher from "../../../core/components/searcher/Searcher";
+import Card from "../../../core/components/card/Card";
+import "./Home.scss";
+import { useFetch } from "../../../adapters/api/useFetch";
+import { buildApiUrl } from "../../../adapters/api/buildApiUrl";
+import { Link } from "react-router-dom";
+import Loader from "../../../core/components/loader/Loader";
 
 const CharacterList = ({ searchQuery, onCharacterClick }) => {
   const apiUrl = buildApiUrl(searchQuery);
@@ -13,20 +13,26 @@ const CharacterList = ({ searchQuery, onCharacterClick }) => {
 
   return (
     <>
-      {isLoading || isPending ? ( 
-        <div><Loader/></div>
+      {isLoading || isPending ? (
+        <div>
+          <Loader />
+        </div>
       ) : (
         <>
-          {characters.map(character => (
-            <Link to={`/character/${character.id}`} key={character.id} className="marvel-card-link">
+          {characters.map((character) => (
+            <Link
+              to={`/character/${character.id}`}
+              key={character.id}
+              className="marvel-card-link"
+            >
               <div>
-              <Card
-                key={character.id}
-                id={character.id}
-                name={character.name}
-                imageUrl={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-                onClick={() => onCharacterClick(character)}
-              />
+                <Card
+                  key={character.id}
+                  id={character.id}
+                  name={character.name}
+                  imageUrl={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+                  onClick={() => onCharacterClick(character)}
+                />
               </div>
             </Link>
           ))}
@@ -36,15 +42,19 @@ const CharacterList = ({ searchQuery, onCharacterClick }) => {
   );
 };
 
-const Home = ({ selectedCharacter, fetchCharacterData, setSelectedCharacter }) => {
-  const [searchQuery, setSearchQuery] = useState('');
+const Home = ({
+  selectedCharacter,
+  fetchCharacterData,
+  setSelectedCharacter,
+}) => {
+  const [searchQuery, setSearchQuery] = useState("");
   const [totalResults, setTotalResults] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);  
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     // Lógica para cargar los datos del personaje seleccionado
     if (selectedCharacter) {
-      console.log('Selected character:', selectedCharacter);
+      console.log("Selected character:", selectedCharacter);
       fetchCharacterData(selectedCharacter.id);
     }
   }, [selectedCharacter, fetchCharacterData]);
@@ -55,18 +65,26 @@ const Home = ({ selectedCharacter, fetchCharacterData, setSelectedCharacter }) =
   };
 
   const handleCharacterClick = async (character) => {
-    console.log('Clicked character:', character);
+    console.log("Clicked character:", character);
     setIsLoading(true);
     setSelectedCharacter(character);
     setIsLoading(false);
   };
-  
+
   return (
     <div className="home-page">
-      <div className='home-page-container'>
+      <div className="home-page-container">
         <Searcher onSearch={handleSearch} />
-        <div className="home-page-container-cards" style={{ justifyContent: searchQuery ? 'flex-start' : 'space-between' }}>
-          <CharacterList searchQuery={searchQuery} onCharacterClick={handleCharacterClick} />
+        <div
+          className="home-page-container-cards"
+          style={{
+            justifyContent: searchQuery ? "flex-start" : "space-between",
+          }}
+        >
+          <CharacterList
+            searchQuery={searchQuery}
+            onCharacterClick={handleCharacterClick}
+          />
         </div>
       </div>
     </div>

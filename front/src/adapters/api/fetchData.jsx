@@ -23,7 +23,8 @@ const getSuspender = (promise) => {
         return response;
     }
   };
-  const then = (onFulfilled, onRejected) => suspender.then(onFulfilled, onRejected);
+  const then = (onFulfilled, onRejected) =>
+    suspender.then(onFulfilled, onRejected);
 
   return { read, then };
 };
@@ -32,8 +33,13 @@ export function fetchData(url) {
   const promise = fetch(url)
     .then((response) => response.json())
     .then((json) => {
-      if (!json || !json.data || !json.data.results || !Array.isArray(json.data.results)) {
-        throw new Error('Invalid data format received from the API');
+      if (
+        !json ||
+        !json.data ||
+        !json.data.results ||
+        !Array.isArray(json.data.results)
+      ) {
+        throw new Error("Invalid data format received from the API");
       }
       return json.data.results;
     })
