@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import SearchIcon from '../../../resources/img/search-icon.svg';
-import { fetchData } from '../../../adapters/api/fetchData';
 import { buildApiUrl } from '../../../adapters/api/buildApiUrl'; // Importa tu función buildApiUrl
 
 import './Searcher.scss';
@@ -14,8 +13,10 @@ const Searcher = ({ onSearch }) => {
     if (searchQuery !== '') {
       setLoading(true);
       const apiUrl = buildApiUrl(searchQuery);
+      console.log("API URL:", apiUrl);
       fetchDataTotalResults(apiUrl)
         .then(total => {
+          console.log("Total results:", total);
           setTotalResults(total || 0);
           setLoading(false);
         })
@@ -28,31 +29,32 @@ const Searcher = ({ onSearch }) => {
 
   const fetchDataTotalResults = async (apiUrl) => {
     try {
-      const response = await fetchData(apiUrl);
-      return response.length; // Ajusta el acceso al número de resultados
+      const response = await fetch(apiUrl);
+      const jsonData = await response.json();
+      console.log("API Response:", jsonData);
+      return jsonData.data.total || 0;
     } catch (error) {
       console.error('Error fetching total results:', error);
       throw error;
     }
   };
+  
 
   const handleChange = (event) => {
     const query = event.target.value;
     setSearchQuery(query);
     onSearch(query);
   };
-
+  
   return (
     <div className="container-searcher">
       <label>
         <input type="search" name="searcher" id="searcher" value={searchQuery} onChange={handleChange} placeholder='Search a character...' />
         <img src={SearchIcon} alt="search-icon"/>
       </label>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
+      <Suspense fallback={<p>Loading...</p>}>
         <p>{searchQuery ? `${totalResults} results found` : '50 results'}</p>
-      )}
+      </Suspense>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import './Home.scss';
 import { useFetch } from '../../../adapters/api/useFetch'; 
 import { buildApiUrl } from '../../../adapters/api/buildApiUrl'; 
 import { Link } from 'react-router-dom';
+import Loader from '../../../core/components/loader/Loader';
 
 const CharacterList = ({ searchQuery, onCharacterClick }) => {
   const apiUrl = buildApiUrl(searchQuery);
@@ -13,11 +14,12 @@ const CharacterList = ({ searchQuery, onCharacterClick }) => {
   return (
     <>
       {isLoading || isPending ? ( 
-        <div>Loading...</div>
+        <div><Loader/></div>
       ) : (
         <>
           {characters.map(character => (
             <Link to={`/character/${character.id}`} key={character.id} className="marvel-card-link">
+              <div>
               <Card
                 key={character.id}
                 id={character.id}
@@ -25,6 +27,7 @@ const CharacterList = ({ searchQuery, onCharacterClick }) => {
                 imageUrl={`${character.thumbnail.path}.${character.thumbnail.extension}`}
                 onClick={() => onCharacterClick(character)}
               />
+              </div>
             </Link>
           ))}
         </>

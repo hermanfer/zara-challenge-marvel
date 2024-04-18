@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 export function useFetch(url) {
   const [data, setData] = useState(null);
+  const [totalResults, setTotalResults] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -10,6 +11,9 @@ export function useFetch(url) {
         setIsLoading(true);
         const response = await fetch(url);
         const jsonData = await response.json();
+        console.log('Respuesta de la API:', jsonData);
+        setTotalResults(jsonData.data.total || 0);
+        console.log('total results:', jsonData.data.total);
         setData(jsonData.data.results);
         setIsLoading(false);
       } catch (error) {
@@ -21,5 +25,5 @@ export function useFetch(url) {
     fetchData();
   }, [url]);
 
-  return { data, isLoading };
+  return { data, totalResults, isLoading };
 }

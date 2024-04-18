@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import './Carousel.scss';
 import { buildComicsApiUrl } from '../../../adapters/api/buildApiUrl'; 
 import useFetchDataComicId from '../../../adapters/api/useFetchComicId'; 
+import Loader from "../loader/Loader";
 
 const Carousel = ({ characterId }) => {
   const carouselRef = useRef(null);
@@ -17,7 +18,7 @@ const Carousel = ({ characterId }) => {
 
   return (
     <div className="carousel" ref={carouselRef}> {/* Añadimos el ref al div del carrusel */}
-      {isLoading && <div>Loading...</div>}
+      {isLoading && <div><Loader/></div>}
       {!isLoading && !error && comics && comics.length > 0 && comics.map((comic, index) => {
         const imageUrl = `${comic.thumbnail.path}.${comic.thumbnail.extension}`;
         return (
@@ -25,7 +26,6 @@ const Carousel = ({ characterId }) => {
             <img src={imageUrl} alt={comic.title} className="carousel__item__image" />
             <div className="carousel__item__content">
               <h3>{comic.title}</h3>
-              {/* Agrega aquí cualquier otra información del cómic que desees mostrar */}
             </div>
           </div>
         );

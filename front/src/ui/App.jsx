@@ -1,5 +1,5 @@
-import React, { useState, Suspense } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from '../ui/pages/home/Home';
 import CardDetail from '../ui/pages/cardDetail/CardDetail';
 import NavBar from '../core/components/navbar/NavBar';
@@ -9,6 +9,8 @@ import { fetchData } from '../adapters/api/fetchData';
 const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
+  const [showFavorites, setShowFavorites] = useState(false);
+
 
   const fetchCharacterData = async (id) => {
     try {
@@ -24,18 +26,24 @@ const App = () => {
     }
   };
 
+  const handleShowFavorites = () => {
+    setShowFavorites(true);
+  };
+
+  console.log("isLoading:", isLoading);
+
   return (
     <>
-      <NavBar />
-      <Router>
+      <BrowserRouter>
+      <NavBar isLoading={isLoading} character={selectedCharacter} onShowFavorites={handleShowFavorites} />
         <Routes>
           <Route
             path="/"
-            element={<Home isLoading={isLoading} fetchCharacterData={fetchCharacterData} setSelectedCharacter={setSelectedCharacter} />}
+            element={<Home isLoading={isLoading} fetchCharacterData={fetchCharacterData} setSelectedCharacter={setSelectedCharacter} showFavorites={showFavorites} />}
           />
           <Route path="/character/:id" element={<CardDetail selectedCharacter={selectedCharacter} />} />
         </Routes>
-      </Router>
+      </BrowserRouter>
     </>
   );
 };
