@@ -38,10 +38,8 @@ const CharacterList = ({ searchQuery, onCharacterClick }) => {
           ))}
         </>
       )}
-      {/* Second link always visible */}
-      <div
-        className="marvel-card-link-test"
-      >
+      
+      <div className="marvel-card-link-test">
         <div data-testid="marvel-card-link-test">
           <Card
             key="1234"
@@ -49,15 +47,18 @@ const CharacterList = ({ searchQuery, onCharacterClick }) => {
             name="Mocked Character"
             imageUrl="../../../resources/img/example-char.png"
             onClick={() =>
-              onCharacterClick({ id: "1234", name: "Mocked Character", description: "¡hola! test" })
+              onCharacterClick({
+                id: "1234",
+                name: "Mocked Character",
+                description: "¡hola! test",
+              })
             }
           />
         </div>
       </div>
     </>
   );
-  
-}
+};
 
 const Home = ({
   selectedCharacter,
@@ -69,7 +70,7 @@ const Home = ({
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    // Lógica para cargar los datos del personaje seleccionado
+    
     if (selectedCharacter) {
       console.log("Selected character:", selectedCharacter);
       fetchCharacterData(selectedCharacter.id);

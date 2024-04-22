@@ -27,7 +27,6 @@ const Card = ({ name, imageUrl, id, onClick }) => {
             <footer className="marvel-card-container-footer">
               <div className="marvel-card-container-footer-info">
                 <h3>{name}</h3>
-                {/* Maneja el evento de clic en el botón de favoritos */}
                 <BtnFav
                   size="small"
                   hideCounter={true}

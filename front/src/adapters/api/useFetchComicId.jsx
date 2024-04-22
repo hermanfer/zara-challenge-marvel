@@ -16,7 +16,7 @@ const useFetchDataComicId = (url) => {
           throw new Error("Failed to fetch data");
         }
         const responseData = await response.json();
-        const comicsData = responseData.data.results; // Aquí ajusta la ruta para los cómics en la respuesta
+        const comicsData = responseData.data.results; 
         setComics(comicsData);
         setIsLoading(false);
       } catch (error) {

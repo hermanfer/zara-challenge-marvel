@@ -14,7 +14,6 @@ const Carousel = ({ characterId }) => {
 
   useEffect(() => {
     if (carouselRef.current && comics.length > 0) {
-      // Aseguramos que comics tenga al menos un elemento
       setImageWidth(carouselRef.current.children[0].offsetWidth || 0);
     }
   }, [comics]);
@@ -22,7 +21,6 @@ const Carousel = ({ characterId }) => {
   return (
     <div className="carousel" ref={carouselRef}>
       {" "}
-      {/* Añadimos el ref al div del carrusel */}
       {isLoading && (
         <div>
           {console.log('Loader is rendering')}
