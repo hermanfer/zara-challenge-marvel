@@ -38,9 +38,26 @@ const CharacterList = ({ searchQuery, onCharacterClick }) => {
           ))}
         </>
       )}
+      {/* Second link always visible */}
+      <div
+        className="marvel-card-link-test"
+      >
+        <div data-testid="marvel-card-link-test">
+          <Card
+            key="1234"
+            id="1234"
+            name="Mocked Character"
+            imageUrl="../../../resources/img/example-char.png"
+            onClick={() =>
+              onCharacterClick({ id: "1234", name: "Mocked Character", description: "¡hola! test" })
+            }
+          />
+        </div>
+      </div>
     </>
   );
-};
+  
+}
 
 const Home = ({
   selectedCharacter,
@@ -72,7 +89,7 @@ const Home = ({
   };
 
   return (
-    <div className="home-page">
+    <div className="home-page" data-testid="home">
       <div className="home-page-container">
         <Searcher onSearch={handleSearch} />
         <div

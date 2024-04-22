@@ -25,13 +25,11 @@ const BtnFav = ({ size, hideCounter, character, hasFavorites }) => {
             className={`heart-icon ${size}`}
             alt="heart-icon"
           />
-        ) : isFavorited() ? (
-          <img src={Heart} className={`heart-icon ${size}`} alt="heart-icon" />
         ) : (
           <img
-            src={HeartEmpty}
+            src={isFavorited() ? Heart : HeartEmpty}
             className={`heart-icon ${size}`}
-            alt="heart-empty-icon"
+            alt="heart-icon"
           />
         )}
       </button>
@@ -43,8 +41,8 @@ const BtnFav = ({ size, hideCounter, character, hasFavorites }) => {
 BtnFav.propTypes = {
   size: PropTypes.oneOf(["small", "medium", "large"]),
   hideCounter: PropTypes.bool,
-  character: PropTypes.object.isRequired,
-  hasFavorites: PropTypes.bool.isRequired,
+  character: PropTypes.object,
+  hasFavorites: PropTypes.bool,
 };
 
 export default BtnFav;

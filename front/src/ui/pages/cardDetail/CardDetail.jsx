@@ -12,16 +12,24 @@ const CardDetail = ({ selectedCharacter }) => {
   }
 
   const { name, description, id } = selectedCharacter;
-  const imageUrl = `${selectedCharacter.thumbnail.path}.${selectedCharacter.thumbnail.extension}`;
+  let imageUrl = '';
+if (typeof selectedCharacter.thumbnail === 'string') {
+  // Si thumbnail es una cadena, asumimos que es una URL directa
+  imageUrl = selectedCharacter.thumbnail;
+} else if (selectedCharacter.thumbnail) {
+  // Si thumbnail es un objeto, seguimos la estructura path y extension
+  imageUrl = `${selectedCharacter.thumbnail.path}.${selectedCharacter.thumbnail.extension}`;
+}
+
 
   const handleToggleFavorite = (event) => {
-    event.stopPropagation(); // Detiene la propagación del evento para evitar que se active en el contenedor de la tarjeta
+    event.stopPropagation();
     toggleFavorite({ id, name, imageUrl });
   };
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <div className="container-card-detail">
+    <Suspense data-testid="loader-detail"  fallback={<div>Loading...</div>}>
+      <div className="container-card-detail" data-testid="character-detail">
         <header className="card-detail-header">
           <div className="card-detail-header__img-info">
             <img
@@ -31,7 +39,7 @@ const CardDetail = ({ selectedCharacter }) => {
             />
             <div className="card-detail-header__img-info-info-character">
               <div className="card-detail-header__img-info-info-character-name-fav">
-                <h4 className="card-detail-header__img-info-info-character-name">
+                <h4 className="card-detail-header__img-info-info-character-name" data-testid="character-name">
                   {name}
                 </h4>
                 <BtnFav

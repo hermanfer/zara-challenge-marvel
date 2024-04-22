@@ -14,6 +14,7 @@ const Card = ({ name, imageUrl, id, onClick }) => {
       to={`/character/${id}`}
       onClick={onClick}
       className="marvel-card-link"
+      data-testid="marvel-card-link-test-link"
     >
       <div>
         <div className="marvel-card">

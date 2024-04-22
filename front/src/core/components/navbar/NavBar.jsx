@@ -10,7 +10,9 @@ const NavBar = ({ isLoading, character }) => {
   const { favoriteCount } = useFavorites();
 
   useEffect(() => {
-    setHasFavorites(favoriteCount > 0);
+    if (!isNaN(favoriteCount)) {
+      setHasFavorites(favoriteCount > 0);
+    }
   }, [favoriteCount]);
 
   return (

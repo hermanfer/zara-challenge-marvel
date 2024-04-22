@@ -25,6 +25,7 @@ const Carousel = ({ characterId }) => {
       {/* Añadimos el ref al div del carrusel */}
       {isLoading && (
         <div>
+          {console.log('Loader is rendering')}
           <Loader />
         </div>
       )}

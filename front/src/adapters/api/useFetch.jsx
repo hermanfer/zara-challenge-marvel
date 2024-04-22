@@ -11,13 +11,10 @@ export function useFetch(url) {
         setIsLoading(true);
         const response = await fetch(url);
         const jsonData = await response.json();
-        console.log("Respuesta de la API:", jsonData);
         setTotalResults(jsonData.data.total || 0);
-        console.log("total results:", jsonData.data.total);
         setData(jsonData.data.results);
         setIsLoading(false);
       } catch (error) {
-        console.error("Error fetching data:", error);
         setIsLoading(false);
       }
     };
