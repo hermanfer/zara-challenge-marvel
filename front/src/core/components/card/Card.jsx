@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useFavorites } from "../../../adapters/state/FavoritesContext"; // Importa el hook useFavorites
+import { useFavorites } from "../../../adapters/state/FavoritesContext";
 import BtnFav from "../btn/BtnFav";
 
 import "./Card.scss";
