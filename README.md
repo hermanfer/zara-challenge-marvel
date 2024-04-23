@@ -272,6 +272,37 @@ De esta manera, todos los componentes dentro de nuestra aplicación tienen acces
       const { toggleFavorite } = useFavorites();
 
 
+## Funcionamiento de la Función fetchData
+
+La función fetchData se encarga de realizar solicitudes a una URL utilizando la API fetch de JavaScript. Esta función implementa un enfoque de suspensión para manejar las promesas de manera asíncrona y proporcionar una interfaz de lectura reactiva.
+
+**getSuspender**
+La función getSuspender es responsable de crear un objeto que contiene dos métodos: **read** y **then**.
+
+**read:** Permite acceder al resultado de la promesa. Si la promesa está pendiente, read arrojará la propia promesa, lo que resultará en la suspensión del componente que lo está utilizando. Una vez que la promesa se resuelve o se rechaza, read devuelve el resultado o lanza un error, respectivamente.
+
+**then:** Proporciona una interfaz para encadenar operaciones después de que la promesa se resuelve o se rechaza. Toma dos argumentos: onFulfilled para el caso de éxito y onRejected para el caso de error, y devuelve una nueva promesa que representa el resultado de la operación.
+
+**Implementación de fetchData**
+La función fetchData utiliza la API fetch para realizar una solicitud a la URL especificada. Una vez que la respuesta se recibe y se convierte en formato JSON, se realiza una validación de la estructura del objeto JSON. Si la estructura no es la esperada, se lanza un error. Finalmente, la función devuelve un objeto creado por getSuspender, que permite leer el resultado de la promesa y encadenar operaciones adicionales utilizando then.
+
+## Ventajas del Enfoque de Suspensión en fetchData
+
+El enfoque de suspensión utilizado en la función fetchData ofrece varias ventajas significativas en comparación con el manejo tradicional de promesas. Aquí detallo algunas de las razones por las que este enfoque es preferible:
+
+1. **Mejora de la Experiencia del Usuario**
+Al utilizar la suspensión, podemos mostrar interfaces de usuario más responsivas y amigables. En lugar de mostrar un indicador de carga estática o un mensaje de espera, podemos **suspender la renderización del componente hasta que la promesa se resuelva,** lo que proporciona una experiencia de usuario más fluida y sin interrupciones.
+
+2. **Código más Limpio y Legible**
+El enfoque de suspensión **simplifica el código al evitar el anidamiento excesivo de promesas y el manejo manual de estados de carga.** Esto conduce a un código más **claro y fácil de entender,** lo que facilita el mantenimiento y la depuración en el futuro.
+
+3. **Mejor Gestión de Errores**
+La suspensión facilita la **gestión de errores** al permitirnos **capturar y manejar errores de manera más efectiva en un solo lugar**, en lugar de tener que lidiar con errores dispersos en múltiples niveles de la aplicación. Esto mejora la robustez y la confiabilidad de nuestra aplicación.
+
+4. **Integración con React Suspense**
+El enfoque de suspensión se integra de manera natural con React Suspense, una característica de React diseñada específicamente para manejar la carga de datos de manera eficiente. Esto **permite aprovechar las capacidades de suspensión de React y mejorar aún más el rendimiento y la experiencia del usuario.**
+
+
 ## Versión de react
   18.2.0
 
