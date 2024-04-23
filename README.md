@@ -79,47 +79,46 @@ cada personaje.
         └── app.jsx --Muestra home y cardDetail
         |__ app.scss
 
-index.js --Renderiza app.jsx dentro del contexto por FavoriteProvider
+    index.js --Renderiza app.jsx dentro del contexto por FavoriteProvider
 
 
 
 # Principios de Diseño:
 
-    Para diseño se utilizó BEM, variables de diseño en *app.scss*:
+Para diseño se utilizó BEM, variables de diseño en *app.scss*:
 
-# variables:
-
-    // variables para fuentes
-$Roboto: "Roboto Condensed", sans-serif;
-$font-weight-bold: 700;
-$font-weight-normal: 400;
-$font-weight-medium: 500;
-
-// estilos del texto
-h1, h2, h3, h4, p {
-  font-family: $Roboto;
+# Variables de tipografía:
   
-  // peso de cada fuente
-  & {
-    &:not(h3):not(p) {
-      font-weight: $font-weight-bold;
-    }
+  $Roboto: "Roboto Condensed", sans-serif;
+  $font-weight-bold: 700;
+  $font-weight-normal: 400;
+  $font-weight-medium: 500;
 
-    &:not(h1):not(h2):not(h4) {
-      font-weight: $font-weight-normal;
-    }
+  h1, h2, h3, h4, p {
+    font-family: $Roboto;
+    
+    & {
+      &:not(h3):not(p) {
+        font-weight: $font-weight-bold;
+      }
 
-    & h4 {
-      font-weight: $font-weight-medium;
+      &:not(h1):not(h2):not(h4) {
+        font-weight: $font-weight-normal;
+      }
+
+      & h4 {
+        font-weight: $font-weight-medium;
+      }
     }
   }
-}
 
-//variables para colores
+# Variables de color:
 
-$black-panther: #000000;
-$marvel-red: #EC1D24; 
-$white-queen: #FFF;
+  $black-panther: #000000;
+  $marvel-red: #EC1D24; 
+  $white-queen: #FFF;
+
+# Componentes principales:
 
 
 
