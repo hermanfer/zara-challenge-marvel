@@ -89,28 +89,28 @@ Para diseño se utilizó BEM, variables de diseño en *app.scss*:
 
 # Variables de tipografía:
   
-  $Roboto: "Roboto Condensed", sans-serif;
-  $font-weight-bold: 700;
-  $font-weight-normal: 400;
-  $font-weight-medium: 500;
+    $Roboto: "Roboto Condensed", sans-serif;
+    $font-weight-bold: 700;
+    $font-weight-normal: 400;
+    $font-weight-medium: 500;
 
-  h1, h2, h3, h4, p {
-    font-family: $Roboto;
+    h1, h2, h3, h4, p {
+        font-family: $Roboto;
     
-    & {
-      &:not(h3):not(p) {
-        font-weight: $font-weight-bold;
-      }
+      & {
+        &:not(h3):not(p) {
+          font-weight: $font-weight-bold;
+        }
 
-      &:not(h1):not(h2):not(h4) {
-        font-weight: $font-weight-normal;
-      }
+        &:not(h1):not(h2):not(h4) {
+          font-weight: $font-weight-normal;
+        }
 
-      & h4 {
-        font-weight: $font-weight-medium;
+        & h4 {
+          font-weight: $font-weight-medium;
+        }
       }
     }
-  }
 
 # Variables de color:
 
