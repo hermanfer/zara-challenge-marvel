@@ -16,6 +16,10 @@ para producción:
 
 ### `npm run build`
 
+Se puede acceder al sitio web en producción desde el siguiente link:
+
+### https://marvelchallenge.quazax.tech/
+
 
 # Arquitectura del proyecto
 
